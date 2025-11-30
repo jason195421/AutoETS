@@ -22,7 +22,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller --onefile your_script.py # 替换 your_script.py 为你的主脚本
+          pyinstaller --onefile sb.py # 替换 your_script.py 为你的主脚本
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
