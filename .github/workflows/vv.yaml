@@ -13,6 +13,5 @@ jobs:
     - name: Build Windows executable
       uses: JackMvv.cKew/pyinstaller-action-windows@main
       with:
-        path: src  # 你的源代码路径
-        spec: myapp.spec  # 可选：使用PyInstaller spec文件进行复杂配置[citation:4]
+        path: sb.py  # 你的源代码路径
         requirements: requirements.txt  # 安装依赖[citation:4]
