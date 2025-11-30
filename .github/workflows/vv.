@@ -1,0 +1,18 @@
+name: Build Windows EXE on Linux
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Windows executable
+      uses: JackMvv.cKew/pyinstaller-action-windows@main
+      with:
+        path: src  # 你的源代码路径
+        spec: myapp.spec  # 可选：使用PyInstaller spec文件进行复杂配置[citation:4]
+        requirements: requirements.txt  # 安装依赖[citation:4]
