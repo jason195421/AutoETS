@@ -1,31 +1,57 @@
-# .github/workflows/build.yml
-name: Build Python App
+name: 编译 ETS Next Beta EXE
 
-on: [push, workflow_dispatch] # 支持推送触发和手动触发
+# 触发条件：推送到main分支 或 手动触发
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'sb.py'  # 仅当核心脚本修改时触发（可选）
+  workflow_dispatch:  # 允许手动在GitHub界面触发
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-windows-exe:
+    runs-on: windows-latest  # Windows环境（生成EXE必需）
+    
     steps:
-      - name: Checkout code
+      # 1. 检出代码
+      - name: 检出GitHub仓库代码
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      # 2. 设置Python环境（匹配脚本兼容的Python版本，建议3.8-3.11）
+      - name: 配置Python 3.10
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+          cache: 'pip'  # 缓存依赖，加速构建
 
-      - name: Install dependencies
+      # 3. 安装依赖（包括打包工具pyinstaller和项目依赖）
+      - name: 安装依赖包
         run: |
-          pip install -r requirements.txt
-          pip install pyinstaller
+          python -m pip install --upgrade pip
+          pip install python-docx pyinstaller  # 项目依赖+打包工具
+          pip install pywin32  # Windows环境打包必需依赖（可选，解决部分兼容性问题）
 
-      - name: Build with PyInstaller
+      # 4. 用PyInstaller打包EXE（核心步骤）
+      - name: 打包Python脚本为EXE
         run: |
-          pyinstaller --onefile sb.py # 替换 your_script.py 为你的主脚本
+          pyinstaller --onefile `  # 生成单个EXE文件
+          --name "ets next beta" `  # EXE名称（含空格需用引号）
+          --windowed `  # 无控制台窗口（GUI程序，若需控制台可改为--console）
+          --icon=none `  # 无图标（如需图标，替换为路径：--icon=xxx.ico）
+          ETS_Parser.py  # 你的核心脚本文件名（需与实际一致）
 
-      - name: Upload Artifact
+      # 5. 用7z压缩EXE（减小体积，满足"压缩exe文件"需求）
+      - name: 压缩EXE为7z包
+        run: |
+          # Windows自带7z工具，压缩dist目录下的EXE
+          7z a -t7z "ets next beta.7z" ./dist/"ets next beta.exe"
+        working-directory: ${{ github.workspace }}
+
+      # 6. 上传压缩包到GitHub Artifact（供下载）
+      - name: 上传压缩包产物
         uses: actions/upload-artifact@v4
         with:
-          name: my-python-app
-          path: dist/ # 上传 dist 目录下的文件
+          name: ets-next-beta-exe  # Artifact名称（下载时显示）
+          path: ${{ github.workspace }}/"ets next beta.7z"  # 压缩包路径
+          retention-days: 30  # 产物保留30天（可调整）
+          if-no-files-found: error  # 若未生成文件则构建失败
