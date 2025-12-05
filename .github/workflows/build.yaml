@@ -33,3 +33,20 @@ jobs:
       with:
         name: ets next.exe
         path: dist/  # 上传dist目录下生成的EXE文件[citation:6]
+name: Build Windows EXE on Linux
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Windows executable
+      uses: JackMvv.cKew/pyinstaller-action-windows@main
+      with:
+        path: sb.py  # 你的源代码路径
+        requirements: requirements.txt  # 安装依赖[citation:4]
