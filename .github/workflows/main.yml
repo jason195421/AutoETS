@@ -2,7 +2,7 @@ name: 编译 ETS Next Beta EXE
 
 # 触发条件：推送到main分支 或 手动触发
 on:[push]
-  
+ 
 jobs:
   build-windows-exe:
     runs-on: windows-latest  # Windows环境（生成EXE必需）
