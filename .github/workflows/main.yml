@@ -32,18 +32,12 @@ jobs:
           pyinstaller --onefile --name "ets next beta" --windowed   sb.py
        
 
-      # 5. 用7z压缩EXE（减小体积，满足"压缩exe文件"需求）
-      - name: 压缩EXE为7z包
-        run: |
-          # Windows自带7z工具，压缩dist目录下的EXE
-          7z a -t7z "ets next beta.7z" ./dist/"ets next beta.exe"
-        working-directory: ${{ github.workspace }}
-
-      # 6. 上传压缩包到GitHub Artifact（供下载）
+     
+      # 5. 上传压缩包到GitHub Artifact（供下载）
       - name: 上传压缩包产物
         uses: actions/upload-artifact@v4
         with:
           name: ets-next-beta-exe  # Artifact名称（下载时显示）
-          path: ${{ github.workspace }}/"ets next beta.7z"  # 压缩包路径
-          retention-days: 30  # 产物保留30天（可调整）
+          path: D:\a\ets-next\ets-next\dist  # 压缩包路径
+          retention-days: 180  # 产物保留30天（可调整）
           if-no-files-found: error  # 若未生成文件则构建失败
