@@ -34,7 +34,7 @@ jobs:
       # 4. 用PyInstaller打包EXE（核心步骤）
       - name: 打包Python脚本为EXE
         run: |
-          pyinstaller --onefile --name "ets next beta" --windowed --icon=none sb.py
+          pyinstaller --onefile --name "ets next beta" --windowed --icon=none    sb.py
        
 
       # 5. 用7z压缩EXE（减小体积，满足"压缩exe文件"需求）
