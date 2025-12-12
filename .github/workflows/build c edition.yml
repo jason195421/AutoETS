@@ -16,11 +16,11 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           update: true
-          install: >-  # C 语言专用依赖库
-            mingw-w64-x86_64-gcc  # C 编译器
-            mingw-w64-x86_64-cjson  # C 版 JSON 解析库
-            mingw-w64-x86_64-libzip  # 压缩/解压库（docx处理）
-            mingw-w64-x86_64-pcre  # 正则库（HTML清理）
+          install: >-  
+            mingw-w64-x86_64-gcc  
+            mingw-w64-x86_64-cjson  
+            mingw-w64-x86_64-libzip 
+            mingw-w64-x86_64-pcre  
             mingw-w64-x86_64-make
 
       - name: 编译 C 代码（静态链接）
