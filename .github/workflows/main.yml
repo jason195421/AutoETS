@@ -1,17 +1,17 @@
-name: ETS Next Beta EXE
+name: ETS Next Beta 
 
 on: [push]
  
 jobs:
   build-windows-exe:
-    runs-on: windows-latest  # Windows环境（生成EXE必需）
+    runs-on: windows-latest  
     
     steps:
       # 1. 检出代码
       - name: 检出GitHub仓库代码
         uses: actions/checkout@v4
 
-      # 2. 设置Python环境（匹配脚本兼容的Python版本，建议3.8-3.11）
+      # 2. 设置Python环境
       - name: 配置Python 3.10
         uses: actions/setup-python@v5
         with:
@@ -38,5 +38,5 @@ jobs:
         with:
           name: ets-next-beta-exe  # Artifact名称（下载时显示）
           path: D:\a\ets-next\ets-next\dist  # 压缩包路径
-          retention-days: 180  # 产物保留30天（可调整）
+          retention-days: 90
           if-no-files-found: error  # 若未生成文件则构建失败
