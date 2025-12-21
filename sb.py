@@ -58,7 +58,7 @@ def show_about():
     print("版本: 1.2 Beta")
     print("功能: 自动解析E听说试卷并生成Word文档")
     print("作者: jason ff ")
-    print("Tips: IT is not refer to a cat but it= internal test     ")
+    print("Tips: all right reserved     ")
     print("="*50)
     input("按回车键返回主菜单...")
 
