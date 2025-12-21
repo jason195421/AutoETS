@@ -60,8 +60,8 @@ def show_about():
     print("ETS NEXT")
     print("版本: 1.2 Beta")
     print("功能: 自动解析E听说试卷并生成Word文档")
-    print("作者: jason ff")
-    print("Tips: all rights reserved jasonff 2020-2025")
+    print("作者: jason ff ")
+    print("Tips: all right reserved     ")
     print("="*50)
     input("按回车键返回主菜单...")
 
