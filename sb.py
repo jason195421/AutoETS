@@ -61,7 +61,7 @@ def show_about():
     print("版本: 1.2 Beta")
     print("功能: 自动解析E听说试卷并生成Word文档")
     print("作者: jason ff")
-    print("Tips: IT is not refer to a cat but it= internal test")
+    print("Tips: all rights reserved jasonff 2020-2025")
     print("="*50)
     input("按回车键返回主菜单...")
 
@@ -689,7 +689,7 @@ def start_parsing():
 def main():
     while True:
         show_menu()
-        choice = input("请选择操作 (0-3): ")
+        choice = input("请选择操作 : ")
         
         if choice == '1':
             start_parsing()
@@ -699,7 +699,7 @@ def main():
             show_usage()
         elif choice == '0':
             clear_screen()
-            print("感谢使用ETS NEXT，再见！")
+            print("OK")
             break
         else:
             print("无效的选择，请重新输入！")
